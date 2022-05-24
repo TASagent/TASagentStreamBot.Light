@@ -10,8 +10,8 @@ You can either build it yourself, or download the binaries
 
 To build the application yourself, you'll need [the latest DotNet Core 6.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).  Then:
 
-* Clone the repository: `git clone https://github.com/TASagent/TASagentTwitchBot.Light`
-* Navigate to the project directory: `cd TASagentTwitchBot.Light/TASagentTwitchBot.Light`
+* Clone the repository: `git clone https://github.com/TASagent/TASagentStreamBot.Light`
+* Navigate to the project directory: `cd TASagentStreamBot.Light/TASagentTwitchBot.Light`
 * Build the DotNet project: `dotnet publish -c Release -r osx-x64`
 * Navigate to the build directory: `cd bin/Release/net6.0/osx-x64/publish`
 * Set execute permission on the binary: `chmod a+x TASagentTwitchBot.Light`
@@ -21,8 +21,8 @@ To build the application yourself, you'll need [the latest DotNet Core 6.0 SDK](
 
 To build the application yourself, you'll need [the latest DotNet Core 6.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).  Then:
 
-* Clone the repository: `git clone https://github.com/TASagent/TASagentTwitchBot.Light`
-* Navigate to the project directory: `cd TASagentTwitchBot.Light/TASagentTwitchBot.Light`
+* Clone the repository: `git clone https://github.com/TASagent/TASagentStreamBot.Light`
+* Navigate to the project directory: `cd TASagentStreamBot.Light/TASagentTwitchBot.Light`
 * Build the DotNet project: `dotnet publish -c Release -r win-x64`
 * Navigate to the build directory: `cd bin/Release/net6.0/win-x64/publish`
 * Run the application: `./TASagentTwitchBot.Light`
