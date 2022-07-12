@@ -1,6 +1,4 @@
-using System.Net;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
 
 using TASagentTwitchBot.Core.Extensions;
 using TASagentTwitchBot.Core.Web;
@@ -32,7 +30,7 @@ builder.Services.AddSignalR();
 
 //Core Agnostic Systems
 builder.Services
-    .AddTASSingleton(TASagentTwitchBot.Core.Config.BotConfiguration.GetConfig())
+    .AddTASSingleton(TASagentTwitchBot.Core.Config.BotConfiguration.GetConfig(GetDefaultConfig()))
     .AddTASSingleton<TASagentTwitchBot.Core.CommunicationHandler>()
     .AddTASSingleton<TASagentTwitchBot.Core.View.BasicView>()
     .AddTASSingleton<TASagentTwitchBot.Core.ErrorHandler>()
@@ -95,6 +93,9 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.UseAuthorization();
 app.UseDefaultFiles();
+
+//Import files from Config folder
+app.UseDocumentsOverrideContent();
 
 //Custom Web Assets
 app.UseStaticFiles();
@@ -176,3 +177,18 @@ catch (Exception ex)
 //
 
 await app.StopAsync();
+
+
+static TASagentTwitchBot.Core.Config.BotConfiguration GetDefaultConfig() =>
+    new TASagentTwitchBot.Core.Config.BotConfiguration()
+    {
+        Version = TASagentTwitchBot.Core.Config.BotConfiguration.CURRENT_VERSION,
+        AuthConfiguration = new TASagentTwitchBot.Core.Config.AuthConfiguration()
+        {
+            //Set admin password blank so it's prompted
+            Admin = new TASagentTwitchBot.Core.Config.CredentialSet() { PasswordHash = "" },
+            //Set non-admin passwords to nonsense, since they aren't required
+            Privileged = new TASagentTwitchBot.Core.Config.CredentialSet() { PasswordHash = TASagentTwitchBot.Core.Cryptography.HashPassword(Guid.NewGuid().ToString()) },
+            User = new TASagentTwitchBot.Core.Config.CredentialSet() { PasswordHash = TASagentTwitchBot.Core.Cryptography.HashPassword(Guid.NewGuid().ToString()) }
+        }
+    };
